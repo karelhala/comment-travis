@@ -1,0 +1,25 @@
+{
+    "botName": "karelhala-bot",
+    "trigger": "release",
+    "releaseMapper": {
+        "major": "major",
+        "minor": "minor",
+        "bug": "bug"
+    },
+    "team": 3461631,
+    "monorepo": "packages",
+    "users": [
+        "karelhala",
+        "akofink",
+        "AllenBW",
+        "dLobatog",
+        "Hyperkid123",
+        "jiridostal",
+        "johnsonm325",
+        "katerinapat",
+        "newswangerd",
+        "ryandillinfelton",
+        "ryelo",
+        "shdunning"
+    ]
+}
