@@ -7,7 +7,6 @@
         "bug": "bug"
     },
     "team": 3461631,
-    "monorepo": "packages",
     "users": [
         "karelhala",
         "akofink",
