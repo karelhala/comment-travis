@@ -20,5 +20,9 @@
         "ryandillinfelton",
         "ryelo",
         "shdunning"
-    ]
+    ],
+    "travis": {
+        "group": "karelhala",
+        "repo": "cinema_browser"
+    }
 }
