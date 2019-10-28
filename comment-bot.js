@@ -16,8 +16,9 @@ const createComment = async ({ repo, owner, number, issue_number, body }, contex
         issue_number: issue_number || number,
         page: -1
     });
+    context && context.log(`Comment triggered - ${body}`);
     if (comments[comments.length - 1] && comments[comments.length - 1].user.login === botName) {
-        context && context.log('Last comment from this bot. No comment, sorry.')
+        context && context.log('Last comment from this bot. No comment, sorry.');
         return;
     }
     octokit.issues.createComment({

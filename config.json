@@ -2,7 +2,6 @@
     "botName": "karelhala-bot",
     "trigger": "release",
     "releaseMapper": {
-        "major": "major",
         "minor": "minor",
         "bug": "bug"
     },
@@ -20,9 +19,5 @@
         "ryandillinfelton",
         "ryelo",
         "shdunning"
-    ],
-    "travis": {
-        "group": "karelhala",
-        "repo": "cinema_browser"
-    }
+    ]
 }
