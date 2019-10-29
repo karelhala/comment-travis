@@ -19,5 +19,8 @@
         "ryandillinfelton",
         "ryelo",
         "shdunning"
-    ]
+    ],
+    "travis": {
+        "script": "npm run release:bot"
+    }
 }

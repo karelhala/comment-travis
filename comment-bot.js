@@ -3,7 +3,7 @@ const { botName: cofigBotName } = require('./config.json');
 const botName = cofigBotName || 'karelhala-bot';
 const octokit = Octokit({
     auth: process.env.GH_TOKEN,
-    userAgent: 'karelhala-bot',
+    userAgent: botName,
     previews: ['jean-grey', 'symmetra'],
     timeZone: 'Europe/Prague',
     baseUrl: 'https://api.github.com',
