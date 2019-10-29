@@ -27,9 +27,9 @@ module.exports = app => {
             const isRelease = corrected.search(new RegExp(trigger)) === 0;
             const currPr = context.issue();
             context.log(currPr);
-            const { data: pullRequest } = await context.github.pullRequests.get(currPr);
             if (isRelease) {
-                if (pullRequest.merged) {
+                const { data: pullRequest } = await context.github.pullRequests.get(currPr);
+                if (pullRequest && pullRequest.merged) {
                     const type = releaseMapper[corrected.substring(trigger.length)] || 'bugfix';
                     context.log(`We will trigger new Release: ${type}!`);
                     createComment({ ...currPr, body: `We will trigger new Release: ${type}!` }, context);
