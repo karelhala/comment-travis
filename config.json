@@ -22,5 +22,9 @@
     ],
     "travis": {
         "script": "npm run release:bot"
+    },
+    "labels": {
+        "release": "bugfix",
+        "release minor": "minor"
     }
 }
