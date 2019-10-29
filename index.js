@@ -43,4 +43,4 @@ module.exports = app => {
             context.log(`Not running release, because magic word not present.`);
         }
     });
-}
+};

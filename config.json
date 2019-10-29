@@ -3,7 +3,7 @@
     "trigger": "release",
     "releaseMapper": {
         "minor": "minor",
-        "bug": "bug"
+        "bugfix": "bugfix"
     },
     "team": 3461631,
     "users": [
