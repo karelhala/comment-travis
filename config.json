@@ -26,5 +26,6 @@
     "labels": {
         "release": "bugfix",
         "release minor": "minor"
-    }
+    },
+    "released": "released"
 }

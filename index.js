@@ -1,9 +1,10 @@
-const { createComment } = require('./comment-bot');
+const { createComment, bot } = require('./comment-bot');
 const {
     trigger: configTrigger,
     releaseMapper: configReleaseMapper,
     users,
-    labels: configLabels
+    labels: configLabels,
+    released
 } = require('./config.json');
 const travisTrigger = require('./travis-bot');
 
@@ -19,6 +20,15 @@ const labels = configLabels || {
     release: 'bugfix',
     'release minor': 'minor'
 }
+
+const triggerRelease = (type) => `&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:shipit::octocat:
+&emsp;&emsp;&emsp;&emsp;&emsp;${type === 'bugfix' ? ':bug:' : ':rose:'}Shipit Squirrel has this release **${type}** surrounded, be ready for a new version${type === 'bugfix' ? ':beetle:' : ':sunflower:'}`;
+
+const noRelease = `&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:rage1::volcano:
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:cop:Sorry, no release, PR has not yet been merged:see_no_evil:`
+
+const alreadyReleased = `&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:broken_heart::persevere:
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:space_invader:Sorry, no release, Pr has already been released:video_game:`
 
 /**
  * This is the main entrypoint to your Probot app
@@ -36,11 +46,15 @@ module.exports = app => {
         if (context.payload.pull_request.merged) {
             context.log('PR has been actually merged!');
             context.log(context.payload.pull_request.labels);
-            const releaseLabel = context.payload.pull_request.labels.find(label => label.name in labels);
-            if (releaseLabel) {
-                const type = labels[releaseLabel.name];
+            const releasedLabel = context.payload.pull_request.labels.find(({ name }) => name === released);
+            const releaseLabel = context.payload.pull_request.labels.find(({ name }) => name in labels);
+            if (releasedLabel) {
+                context.log(`Already released, not releasing again.`);
+                createComment({ ...currPr, body: alreadyReleased }, context);
+            } else if (releaseLabel) {
+                const type = labels[releaseLabel.name] || 'bugfix';
                 context.log(`We will trigger new Release: ${type}!`);
-                createComment({ ...currPr, body: `We will trigger new Release: ${type}!` }, context);
+                createComment({ ...currPr, body: triggerRelease(type) }, context);
                 return travisTrigger(currPr, type, context);
             } else {
                 context.log(`No release label found, no release triggered.`);
@@ -59,19 +73,30 @@ module.exports = app => {
             const currPr = context.issue();
             context.log(currPr);
             if (isRelease) {
-                const { data: pullRequest } = await context.github.pullRequests.get(currPr);
+                const { data: pullRequest } = await bot.pulls.get({
+                    owner: currPr.owner,
+                    repo: currPr.repo,
+                    pull_number: currPr.number || currPr.pull_number
+                });
                 if (pullRequest && pullRequest.merged) {
-                    const type = releaseMapper[corrected.substring(trigger.length)] || 'bugfix';
-                    context.log(`We will trigger new Release: ${type}!`);
-                    createComment({ ...currPr, body: `We will trigger new Release: ${type}!` }, context);
-                    return travisTrigger(currPr, type, context);
+                    const releasedLabel = pullRequest.labels.find(({ name }) => name === released);
+                    if (releasedLabel) {
+                        context.log(`Already released, not releasing again.`);
+                        createComment({ ...currPr, body: alreadyReleased }, context);
+                    } else {
+                        const type = releaseMapper[corrected.substring(trigger.length)] || 'bugfix';
+                        context.log(`We will trigger new Release: ${type}!`);
+                        createComment({ ...currPr, body: triggerRelease(type) }, context);
+                        return travisTrigger(currPr, type, context);
+                    }
                 }
                 else {
                     context.log(`PR not merged, not gonna release.`);
-                    createComment({ ...currPr, body: 'Sorry no release, PR has not been merged.' }, context);
+                    createComment({ ...currPr, body: noRelease }, context);
                 }
+            } else {
+                context.log(`Not running release, because magic word not present.`);
             }
-            context.log(`Not running release, because magic word not present.`);
         }
     });
 };
