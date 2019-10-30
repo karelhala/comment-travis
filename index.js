@@ -21,14 +21,14 @@ const labels = configLabels || {
     'release minor': 'minor'
 }
 
-const triggerRelease = (type) => `&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:shipit::octocat:
+const triggerRelease = (type) => `&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:soon::shipit::octocat:
 &emsp;&emsp;&emsp;&emsp;&emsp;${type === 'bugfix' ? ':bug:' : ':rose:'}Shipit Squirrel has this release **${type}** surrounded, be ready for a new version${type === 'bugfix' ? ':beetle:' : ':sunflower:'}`;
 
 const noRelease = `&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:rage1::volcano:
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:cop:Sorry, no release, PR has not yet been merged:see_no_evil:`
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:no_bell:Sorry, no release, PR has not yet been merged:see_no_evil:`
 
 const alreadyReleased = `&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:broken_heart::persevere:
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:space_invader:Sorry, no release, Pr has already been released:video_game:`
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:mute:Sorry, no release, Pr has already been released:video_game:`
 
 /**
  * This is the main entrypoint to your Probot app
