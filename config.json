@@ -1,5 +1,5 @@
 {
-    "botName": "karelhala-bot",
+    "botName": "nacho-bot",
     "trigger": "release",
     "releaseMapper": {
         "minor": "minor",
