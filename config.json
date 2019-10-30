@@ -18,7 +18,8 @@
         "newswangerd",
         "ryandillinfelton",
         "ryelo",
-        "shdunning"
+        "shdunning",
+        "PanSpagetka"
     ],
     "travis": {
         "script": "npm run release:bot"
