@@ -84,7 +84,7 @@ module.exports = app => {
                         context.log(`Already released, not releasing again.`);
                         createComment({ ...currPr, body: alreadyReleased }, context);
                     } else {
-                        const type = releaseMapper[corrected.substring(trigger.length)] || 'bugfix';
+                        const type = releaseMapper[corrected.substring(trigger.length).trim()] || 'bugfix';
                         context.log(`We will trigger new Release: ${type}!`);
                         createComment({ ...currPr, body: triggerRelease(type) }, context);
                         return travisTrigger(currPr, type, context);

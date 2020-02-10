@@ -2,6 +2,7 @@
     "botName": "nacho-bot",
     "trigger": "release",
     "releaseMapper": {
+        "major": "major",
         "minor": "minor",
         "bugfix": "bugfix"
     },
