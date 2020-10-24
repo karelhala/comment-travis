@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "dev": "nodemon",
-    "start": "concurrently \"probot run ./bot/index.js -p 1337\" \"npm run build:web && node ./server.js\"",
+    "start": "probot run ./bot/index.js",
     "lint": "eslint ./src",
     "test": "standard",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage",
