@@ -14,12 +14,12 @@
   ],
   "scripts": {
     "dev": "nodemon",
-    "start": "concurrently \"probot run ./bot/index.js -p 1337\" \"npm run build && node ./server.js\"",
+    "start": "concurrently \"probot run ./bot/index.js -p 1337\" \"npm run build:web && node ./server.js\"",
     "lint": "eslint ./src",
     "test": "standard",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage",
     "start:web": "PUBLIC_URL=/ react-scripts start",
-    "build": "PUBLIC_URL=/ react-scripts build",
+    "build:web": "PUBLIC_URL=/ react-scripts build",
     "test:web": "react-scripts test",
     "eject": "react-scripts eject"
   },
