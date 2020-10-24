@@ -14,7 +14,7 @@ async function travisTrigger({ owner, repo, number, issue_number }, releaseType,
         }
     }
 
-    const travisURL = `https://api.travis-ci.org/repo/${(travis && travis.group) || owner}%2F${(travis && travis.repo) || repo}/requests`;
+    const travisURL = `https://api.travis-ci.com/repo/${(travis && travis.group) || owner}%2F${(travis && travis.repo) || repo}/requests`;
     context && context.log(`Notifyig travis on URL: ${travisURL}`);
     context && context.log(`With data: ${JSON.stringify(body)}`);
     try {
