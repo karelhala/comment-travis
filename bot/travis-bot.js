@@ -29,7 +29,10 @@ async function travisTrigger({ owner, repo, number, issue_number }, releaseType,
                     'Authorization': `token ${process.env.TRAVIS_TOKEN}`
                 }
             }
-        )
+        ).catch(({ response: { data, status } }) => {
+            context.log('Error status: ', status);
+            context.log('Error data: ', data);
+        })
     } catch(e) {
         context.log(e);
     }
