@@ -1,4 +1,4 @@
-const { createComment, bot } = require('./comment-bot');
+const { createComment, checkUser, bot } = require('./comment-bot');
 const {
     trigger: configTrigger,
     releaseMapper: configReleaseMapper,
@@ -63,8 +63,8 @@ module.exports = app => {
     });
 
     app.on(['issue_comment.edited', 'issue_comment.created'], async context => {
-        let allowed = true;
-        if (users && !users.some(user => user === context.payload.sender.login)) {
+        let allowed = await checkUser(context.issue(), context.payload.sender.login, context);
+        if (!allowed && users && !users.some(user => user === context.payload.sender.login)) {
             allowed = false;
         }
         if (allowed && context.payload.comment.body) {

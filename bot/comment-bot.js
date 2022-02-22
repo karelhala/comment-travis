@@ -1,7 +1,7 @@
-const Octokit = require("@octokit/rest");
+const { Octokit } = require("@octokit/rest");
 const { botName: cofigBotName } = require('./config.json');
 const botName = cofigBotName || 'karelhala-bot';
-const octokit = Octokit({
+const octokit = new Octokit({
     auth: process.env.GH_TOKEN,
     userAgent: botName,
     previews: ['jean-grey', 'symmetra'],
@@ -29,7 +29,23 @@ const createComment = async ({ repo, owner, number, issue_number, body }, contex
     });
 }
 
+const checkUser = async ({ repo, owner }, username, context) => {
+  try {
+    await octokit.repos.checkCollaborator({
+        repo,
+        owner,
+        username
+    });
+    return true;
+  } catch (e) {
+    context.log(e);
+    return false;
+  }
+  
+}
+
 module.exports = {
+    checkUser,
     createComment,
     bot: octokit
 };
