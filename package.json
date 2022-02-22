@@ -20,8 +20,8 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
-    "axios": "^0.26.0",
     "@octokit/rest": "^18.12.0",
+    "axios": "^0.26.0",
     "probot": "^12.2.1"
   },
   "devDependencies": {
