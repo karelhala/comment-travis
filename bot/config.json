@@ -10,17 +10,13 @@
     "users": [
         "karelhala",
         "akofink",
-        "AllenBW",
-        "dLobatog",
         "Hyperkid123",
         "jiridostal",
         "johnsonm325",
-        "katerinapat",
         "newswangerd",
         "ryandillinfelton",
         "ryelo",
-        "shdunning",
-        "PanSpagetka"
+        "fhlavac"
     ],
     "travis": {
         "script": "npm run release:bot"
